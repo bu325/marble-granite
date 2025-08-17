@@ -1,0 +1,84 @@
+
+#:import InventoryScreen screens.inventory.InventoryScreen
+#:import ClientsScreen screens.clients.ClientsScreen
+#:import WorkersScreen screens.workers.WorkersScreen
+#:import ExpensesScreen screens.expenses.ExpensesScreen
+#:import InvoicesScreen screens.invoices.InvoicesScreen
+#:import ReportsScreen screens.reports.ReportsScreen
+#:import SettingsScreen screens.settings.SettingsScreen
+
+<MainLayout>:
+    orientation: 'vertical'
+
+    MDToolbar:
+        title: 'إدارة الرخام والجرانيت'
+        pos_hint: {'top': 1}
+        elevation: 10
+        right_action_items: [['dots-vertical', lambda x: app.root.ids.screen_manager.current_screen.open_menu() if hasattr(app.root.ids.screen_manager.current_screen, 'open_menu') else None]]
+
+    MDScreenManager:
+        id: screen_manager
+
+        InventoryScreen:
+            id: inventory_screen
+
+        ClientsScreen:
+            id: clients_screen
+
+        WorkersScreen:
+            id: workers_screen
+
+        ExpensesScreen:
+            id: expenses_screen
+
+        InvoicesScreen:
+            id: invoices_screen
+
+        ReportsScreen:
+            id: reports_screen
+
+        SettingsScreen:
+            id: settings_screen
+
+    MDBottomNavigation:
+        panel_color: app.theme_cls.primary_color
+        selected_color_background: app.theme_cls.accent_color
+        text_color_active: 1, 1, 1, 1
+
+        MDBottomNavigationItem:
+            name: 'inventory_nav'
+            text: 'المخزون'
+            icon: 'package-variant-closed'
+            on_tab_press: app.root.ids.screen_manager.current = 'inventory'
+
+        MDBottomNavigationItem:
+            name: 'clients_nav'
+            text: 'العملاء'
+            icon: 'account-group'
+            on_tab_press: app.root.ids.screen_manager.current = 'clients'
+
+        MDBottomNavigationItem:
+            name: 'workers_nav'
+            text: 'العمال'
+            icon: 'hard-hat'
+            on_tab_press: app.root.ids.screen_manager.current = 'workers'
+
+        MDBottomNavigationItem:
+            name: 'invoices_nav'
+            text: 'الفواتير'
+            icon: 'file-document'
+            on_tab_press: app.root.ids.screen_manager.current = 'invoices'
+
+        MDBottomNavigationItem:
+            name: 'reports_nav'
+            text: 'التقارير'
+            icon: 'chart-bar'
+            on_tab_press: app.root.ids.screen_manager.current = 'reports'
+
+        MDBottomNavigationItem:
+            name: 'settings_nav'
+            text: 'الإعدادات'
+            icon: 'cog'
+            on_tab_press: app.root.ids.screen_manager.current = 'settings'
+
+
